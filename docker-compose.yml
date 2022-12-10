@@ -1,0 +1,28 @@
+version: '3.9'
+
+services:
+  # fiber-app:
+  #   image: imageName
+
+  postgresql-app:
+    restart: always
+    image: postgres
+    volumes:
+      - ./postgresql-db/pgdata:/var/lib/postgresql/data/pgdata
+    environment:
+      - PGDATA=/var/lib/postgresql/data/pgdata
+      - POSTGRES_DB=menu
+      - POSTGRES_PASSWORD=docker123
+    expose:
+      - 5432
+
+  pgadmin4:
+    restart: always
+    image: dpage/pgadmin4
+    environment:
+      - PGADMIN_DEFAULT_EMAIL=hssong1024@gmail.com
+      - PGADMIN_DEFAULT_PASSWORD=docker123
+    ports:
+      - 5050:80
+    depends_on:
+      - postgresql-app
