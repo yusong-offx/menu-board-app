@@ -1,1 +1,5 @@
-postgresql-db/pgdata
+postgresql_db/pgdata
+redis_db/
+flutter/flutter_camera_test
+test/
+studymd/

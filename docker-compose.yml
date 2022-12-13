@@ -3,12 +3,22 @@ version: '3.9'
 services:
   # fiber-app:
   #   image: imageName
+  #   depends_on: 마지막에
 
-  postgresql-app:
-    restart: always
+  redis-db:
+    image: redis
+    expose:
+      - 6379
+    volumes:
+      - ./redis_db:/data
+    command:
+      - --save 60 1
+      - --loglevel warning
+
+  postgresql-db:
     image: postgres
     volumes:
-      - ./postgresql-db/pgdata:/var/lib/postgresql/data/pgdata
+      - ./postgresql_db/pgdata:/var/lib/postgresql/data/pgdata
     environment:
       - PGDATA=/var/lib/postgresql/data/pgdata
       - POSTGRES_DB=menu
@@ -17,7 +27,6 @@ services:
       - 5432
 
   pgadmin4:
-    restart: always
     image: dpage/pgadmin4
     environment:
       - PGADMIN_DEFAULT_EMAIL=hssong1024@gmail.com

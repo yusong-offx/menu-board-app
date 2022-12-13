@@ -1,17 +1,21 @@
 package main
 
 import (
-	"log"
+	"time"
 
-	"github.com/gofiber/fiber/v2"
+	"github.com/yusong-offx/menu-board/components"
 )
 
 func main() {
-	app := fiber.New()
+	// app := fiber.New(fiber.Config{
+	// 	Prefork: false,
+	// })
 
-	app.Get("/", func(c *fiber.Ctx) error {
-		return c.SendString("Hello, World!")
-	})
+	// route.MiddleWare(app)
+	// route.AllGet(app)
 
-	log.Fatal(app.Listen(":3000"))
+	// log.Fatal(app.Listen(":3000"))
+
+	components.LoggerInit()
+	time.Sleep(time.Second * 11)
 }
