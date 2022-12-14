@@ -6,6 +6,7 @@ import (
 	"log"
 
 	"github.com/go-redis/redis/v9"
+	_ "github.com/lib/pq"
 )
 
 var (

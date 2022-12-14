@@ -1,21 +1,24 @@
 package main
 
 import (
-	"time"
+	"log"
 
+	"github.com/gofiber/fiber/v2"
 	"github.com/yusong-offx/menu-board/components"
+	"github.com/yusong-offx/menu-board/route"
 )
 
 func main() {
-	// app := fiber.New(fiber.Config{
-	// 	Prefork: false,
-	// })
-
-	// route.MiddleWare(app)
-	// route.AllGet(app)
-
-	// log.Fatal(app.Listen(":3000"))
-
+	components.PostgresConnect()
+	components.RedisConnect()
 	components.LoggerInit()
-	time.Sleep(time.Second * 11)
+
+	app := fiber.New(fiber.Config{
+		Prefork: false,
+	})
+
+	route.MiddleWare(app)
+	route.AllGet(app)
+
+	log.Fatal(app.Listen(":3000"))
 }

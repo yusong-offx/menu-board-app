@@ -26,7 +26,7 @@ func makeLogger() *log.Logger {
 	if err != nil {
 		log.Println(err)
 	}
-	return log.New(file, "", log.LstdFlags)
+	return log.New(file, "", log.Ltime)
 }
 
 func LoggerInit() {
@@ -39,9 +39,9 @@ func LoggerInit() {
 	go func() {
 		defer ticker.Stop()
 		yesterday := time.Now().Day()
-		for t := range ticker.C {
+		for today := range ticker.C {
 			// Different day allow to create new logger
-			if t.Day() != yesterday {
+			if today.Day() != yesterday {
 				Logger = makeLogger()
 				yesterday = time.Now().Day()
 			} else {
