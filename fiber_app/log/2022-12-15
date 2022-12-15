@@ -1,0 +1,35 @@
+01:57:24 172.19.0.1  GET 404 /post Cannot GET /post
+01:57:28 172.19.0.1  POST 404 /post Cannot POST /post
+01:57:44 172.19.0.1  POST 405 / Method Not Allowed
+01:57:47 172.19.0.1  GET 500 / good
+01:57:51 172.19.0.1  GET 200 /hello -
+01:57:58 172.19.0.1  POST 404 /post Cannot POST /post
+01:58:11 172.19.0.1  POST 404 /post Cannot POST /post
+01:58:20 172.19.0.1  POST 404 /post Cannot POST /post
+01:58:49 172.19.0.1  POST 500 /post pq: syntax error at or near "$1"
+01:59:09 172.19.0.1  POST 500 /post pq: column "test" of relation "test" does not exist
+01:59:49 172.19.0.1  POST 201 /post -
+02:39:57 170.64.138.106  GET 500 / good
+03:28:14 172.19.0.1  POST 201 /post -
+03:28:29 172.19.0.1  POST 405 / Method Not Allowed
+03:28:32 172.19.0.1  GET 200 / -
+03:31:01 172.19.0.1  GET 500 / sql: no rows in result set
+03:31:06 172.19.0.1  POST 201 /post -
+03:31:08 172.19.0.1  GET 500 / sql: Scan error on column index 1, name "file": unsupported Scan, storing driver.Value type []uint8 into type *map[string]string
+03:34:17 172.19.0.1  GET 200 / -
+03:34:42 172.19.0.1  GET 200 / -
+03:37:57 172.19.0.1  POST 500 /post sql: converting argument $1 type: unsupported type map[string]string, a map
+03:39:13 172.19.0.1  GET 200 / -
+03:39:15 172.19.0.1  GET 200 / -
+03:39:38 172.19.0.1  GET 200 / -
+03:39:39 172.19.0.1  GET 200 / -
+03:39:57 172.19.0.1  GET 200 / -
+03:41:04 172.19.0.1  GET 200 / -
+04:23:35 192.241.194.190  GET 200 / -
+04:32:22 194.55.186.216  POST 404 /boaform/admin/formLogin Cannot POST /boaform/admin/formLogin
+04:40:27 64.62.197.51  GET 200 / -
+04:42:53 64.62.197.53  GET 404 /favicon.ico Cannot GET /favicon.ico
+11:35:57 185.180.143.18  GET 200 / -
+11:36:11 185.180.143.18  GET 404 /webfig/ Cannot GET /webfig/
+11:36:26 185.180.143.18  GET 200 / -
+11:36:26 185.180.143.18  GET 404 /solr/ Cannot GET /solr/

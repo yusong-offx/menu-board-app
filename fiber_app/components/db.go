@@ -16,15 +16,17 @@ var (
 )
 
 func PostgresConnect() {
-	Postgres, err = sql.Open("postgres",
+	if Postgres, err = sql.Open("postgres",
 		fmt.Sprintf("host=%s port=%d user=%s password=%s  dbname=%s sslmode=disable",
 			"postgresql-db",
 			5432,
 			"postgres",
 			"docker123",
 			"menu",
-		))
-	if err != nil {
+		)); err != nil {
+		log.Fatal(err)
+	}
+	if err = Postgres.Ping(); err != nil {
 		log.Fatal(err)
 	}
 }
