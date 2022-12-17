@@ -8,14 +8,6 @@ import (
 )
 
 func MiddleWare(app *fiber.App) {
-	app.Use(logger.New(
-		logger.Config{
-			Format: "${ip} ${ips} ${method} ${status} ${path} ${error}\n",
-			Done: func(c *fiber.Ctx, logString []byte) {
-				// If you want to use UTF-8, change string to []rune.
-				components.Logger.Print(string(logString))
-			},
-		},
-	))
+	app.Use(logger.New(components.LoggerConfig))
 	app.Use(recover.New())
 }

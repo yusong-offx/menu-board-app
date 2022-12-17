@@ -3,6 +3,7 @@ package route
 import (
 	"encoding/json"
 	"errors"
+	"time"
 
 	"github.com/gofiber/fiber/v2"
 	"github.com/yusong-offx/menu-board/components"
@@ -22,6 +23,7 @@ func AllGet(app *fiber.App) {
 		return c.JSON(data)
 	})
 	app.Get("/hello", func(c *fiber.Ctx) error {
+		time.Sleep(time.Second * 10)
 		return c.SendString("hello-world!")
 	})
 	app.Get("/error", func(c *fiber.Ctx) error {

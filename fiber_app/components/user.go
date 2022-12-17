@@ -7,32 +7,58 @@ import (
 	"golang.org/x/crypto/bcrypt"
 )
 
-type SignUpStruct struct {
-	LoginID   string `json:"id"`
-	Password  []byte `json:"password"`
+type UserStruct struct {
+	LoginID   string `json:"login_id"`
+	Password  string `json:"login_password"`
 	FirstName string `json:"first_name"`
 	LastName  string `json:"last_name"`
 	Email     string `json:"email"`
 }
 
 type LoginStruct struct {
-	LoginID  string `json:"id"`
-	Password []byte `json:"password"`
+	LoginID  string `json:"login_id"`
+	Password string `json:"login_password"`
 }
 
-func FuncSignUp(c *fiber.Ctx) error {
-	data := SignUpStruct{}
+type LoginRetStruct struct {
+	ID        int    `json:"id"`
+	LoginID   string `json:"login_id"`
+	FirstName string `json:"first_name"`
+	LastName  string `json:"last_name"`
+	Email     string `json:"email"`
+}
+
+func FuncSignUpUsersChecker(c *fiber.Ctx) error {
+	data := struct {
+		Id string `json:"login_id"`
+	}{}
 	if err := c.BodyParser(&data); err != nil {
 		return err
 	}
-	if err := Postgres.QueryRow("SELECT login_id FROM users WHERE login_id = $1", data.LoginID).Scan(&data.LoginID); err == nil {
-		return errors.New("user_id is already exist")
+	// Check user already exist
+	if err := Postgres.QueryRow(
+		"SELECT login_id FROM users WHERE login_id = $1",
+		data.Id).
+		Scan(&data.Id); err == nil {
+		return c.Status(fiber.StatusConflict).SendString("user_id is already exist")
 	}
-	hashPassword, err := bcrypt.GenerateFromPassword(data.Password, bcrypt.DefaultCost)
+	return c.SendStatus(fiber.StatusOK)
+}
+
+func FuncSignUp(c *fiber.Ctx) error {
+	data := UserStruct{}
+	if err := c.BodyParser(&data); err != nil {
+		return err
+	}
+	// Bcrypt password
+	hashPassword, err := bcrypt.GenerateFromPassword([]byte(data.Password), bcrypt.DefaultCost)
 	if err != nil {
 		return err
 	}
-	switch result, err := Postgres.Exec("INSERT INTO users (login_id, login_password, first_name, last_name, email) VALUES ($1, $2, $3, $4, $5)", data.LoginID, hashPassword, data.FirstName, data.LastName, data.Email); err {
+	// Insert into database
+	switch result, err := Postgres.Exec(
+		"INSERT INTO users (login_id, login_password, first_name, last_name, email) VALUES ($1, $2, $3, $4, $5)",
+		data.LoginID, hashPassword, data.FirstName, data.LastName, data.Email); err {
 	case nil:
 		n, err := result.RowsAffected()
 		switch {
@@ -48,5 +74,18 @@ func FuncSignUp(c *fiber.Ctx) error {
 }
 
 func FuncLogin(c *fiber.Ctx) error {
-	return c.SendStatus(fiber.StatusOK)
+	var hashPassword []byte
+	data, ret := LoginStruct{}, LoginRetStruct{}
+	if err := c.BodyParser(&data); err != nil {
+		return err
+	}
+	if err := Postgres.QueryRow("SELECT * FROM users WHERE login_id=$1", data.LoginID).
+		Scan(&ret.ID, &ret.LoginID, &hashPassword, &ret.FirstName, &ret.LastName, &ret.Email); err != nil {
+		return c.Status(fiber.StatusConflict).SendString("wrong id")
+	}
+	if err := bcrypt.CompareHashAndPassword(hashPassword, []byte(data.Password)); err != nil {
+		return c.Status(fiber.StatusConflict).SendString("wrong password")
+	}
+	// JWT 생성
+	return c.Status(fiber.StatusOK).JSON(ret)
 }

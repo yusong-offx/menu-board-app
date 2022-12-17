@@ -12,10 +12,10 @@ import (
 var (
 	Postgres *sql.DB
 	Redis    *redis.Client
-	err      error
 )
 
 func PostgresConnect() {
+	var err error
 	if Postgres, err = sql.Open("postgres",
 		fmt.Sprintf("host=%s port=%d user=%s password=%s  dbname=%s sslmode=disable",
 			"postgresql-db",

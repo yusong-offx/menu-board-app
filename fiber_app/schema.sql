@@ -1,11 +1,11 @@
 DROP TABLE IF EXISTS USERS;
-DROP TABLE IF EXISTS RESTAURANTS_TYPE;
+DROP TABLE IF EXISTS RESTAURANTS_TYPES;
 DROP TABLE IF EXISTS RESTAURANTS;
 DROP TABLE IF EXISTS MENUS;
 
 CREATE TABLE USERS (
     id serial primary key,
-    login_id varchar(20) not null,
+    login_id varchar(20) unique not null,
     login_password bytea not null,
     first_name varchar(100),
     last_name varchar(100),
