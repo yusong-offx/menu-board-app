@@ -1,8 +1,6 @@
 package components
 
 import (
-	"errors"
-
 	"github.com/gofiber/fiber/v2"
 	"golang.org/x/crypto/bcrypt"
 )
@@ -28,7 +26,7 @@ type LoginRetStruct struct {
 	Email     string `json:"email"`
 }
 
-func FuncSignUpUsersChecker(c *fiber.Ctx) error {
+func PostSignUpUsersChecker(c *fiber.Ctx) error {
 	data := struct {
 		Id string `json:"login_id"`
 	}{}
@@ -45,7 +43,7 @@ func FuncSignUpUsersChecker(c *fiber.Ctx) error {
 	return c.SendStatus(fiber.StatusOK)
 }
 
-func FuncSignUp(c *fiber.Ctx) error {
+func PostSignUp(c *fiber.Ctx) error {
 	data := UserStruct{}
 	if err := c.BodyParser(&data); err != nil {
 		return err
@@ -60,12 +58,8 @@ func FuncSignUp(c *fiber.Ctx) error {
 		"INSERT INTO users (login_id, login_password, first_name, last_name, email) VALUES ($1, $2, $3, $4, $5)",
 		data.LoginID, hashPassword, data.FirstName, data.LastName, data.Email); err {
 	case nil:
-		n, err := result.RowsAffected()
-		switch {
-		case err != nil:
+		if _, err := result.RowsAffected(); err != nil {
 			return err
-		case n != 1:
-			return errors.New("sql insert error")
 		}
 	default:
 		return err
@@ -73,7 +67,7 @@ func FuncSignUp(c *fiber.Ctx) error {
 	return c.SendStatus(fiber.StatusCreated)
 }
 
-func FuncLogin(c *fiber.Ctx) error {
+func PostLogin(c *fiber.Ctx) error {
 	var hashPassword []byte
 	data, ret := LoginStruct{}, LoginRetStruct{}
 	if err := c.BodyParser(&data); err != nil {
@@ -87,5 +81,5 @@ func FuncLogin(c *fiber.Ctx) error {
 		return c.Status(fiber.StatusConflict).SendString("wrong password")
 	}
 	// JWT 생성
-	return c.Status(fiber.StatusOK).JSON(ret)
+	return c.JSON(ret)
 }

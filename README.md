@@ -25,6 +25,7 @@ sql
 - email 비밀번호 찾기
 - 알러지 물질 클릭시 제외 명도 낮추기 /front 에서 map으로 재구성
 - caddy web-server 구성
+- user 탈퇴 수정
 
 next
 - 요리 타입(한식, 일식..)에 따라 분석 기능

@@ -11,8 +11,10 @@ import (
 func main() {
 	components.PostgresConnect()
 	defer components.Postgres.Close()
+
 	components.RedisConnect()
 	defer components.Redis.Close()
+
 	components.LoggerInit()
 
 	app := fiber.New(fiber.Config{

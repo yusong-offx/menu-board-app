@@ -2,13 +2,19 @@ package route
 
 import (
 	"github.com/gofiber/fiber/v2"
-	"github.com/yusong-offx/menu-board/components"
+	fn "github.com/yusong-offx/menu-board/components"
 )
 
 func AllPost(app *fiber.App) {
-	signup := app.Group("/signup")
-	signup.Post("/", components.FuncSignUp)
-	signup.Post("/check/id", components.FuncSignUpUsersChecker)
+	////////
+	// User
+	user.Post("/login", fn.PostLogin)
 
-	app.Post("/login", components.FuncLogin)
+	// /user/signup/*
+	signup.Post("/", fn.PostSignUp)
+	signup.Post("/check/id", fn.PostSignUpUsersChecker)
+
+	//////////////
+	// Restaurant
+	restaurant.Post("/type", fn.PostRestaurantTypes)
 }

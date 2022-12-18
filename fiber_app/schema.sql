@@ -1,7 +1,7 @@
-DROP TABLE IF EXISTS USERS;
-DROP TABLE IF EXISTS RESTAURANTS_TYPES;
-DROP TABLE IF EXISTS RESTAURANTS;
 DROP TABLE IF EXISTS MENUS;
+DROP TABLE IF EXISTS RESTAURANTS;
+DROP TABLE IF EXISTS RESTAURANT_TYPES;
+DROP TABLE IF EXISTS USERS;
 
 CREATE TABLE USERS (
     id serial primary key,
@@ -20,7 +20,7 @@ CREATE TABLE RESTAURANTS (
     id serial primary key,
     user_id int references USERS(id) on delete cascade,
     name varchar(30) unique,
-    restaurant_type varchar(20) references RESTAURANT_TYPES(restaurant_type) on delete set null,
+    restaurant_type varchar(20)[] references RESTAURANT_TYPES(restaurant_type) on delete set null,
     origin json,
     menu_types varchar(20)[]
 );
@@ -38,4 +38,4 @@ CREATE TABLE MENUS (
 DROP INDEX IF EXISTS idx_login_id;
 CREATE INDEX idx_login_id on USERS using hash (login_id);
 
--- file server -> nginx
+insert into users (login_id, login_password, first_name, last_name, email) values ('yusong','yusong', 'yujin', 'song', 'abc@gmail.com');
