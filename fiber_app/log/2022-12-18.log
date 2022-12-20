@@ -1,0 +1,24 @@
+10:21:01 172.18.0.1  GET 200 / -
+10:21:01 172.18.0.1  GET 404 /favicon.ico Cannot GET /favicon.ico
+10:21:13 172.18.0.1  OPTIONS 405 / Method Not Allowed
+10:21:13 172.18.0.1  GET 200 / -
+10:21:23 172.18.0.1  OPTIONS 405 / Method Not Allowed
+10:21:23 172.18.0.1  GET 200 / -
+11:07:31 172.18.0.1  POST 500 /restaurant/ json: cannot unmarshal string into Go struct field RestaurantsStruct.restaurant_type of type sql.NullString
+11:08:32 172.18.0.1  POST 500 /restaurant/ sql: converting argument $5 type: unsupported type []string, a slice of string
+11:09:04 172.18.0.1  POST 500 /restaurant/ pq: invalid input syntax for type json
+11:09:08 172.18.0.1  POST 500 /restaurant/ pq: invalid input syntax for type json
+11:09:41 172.18.0.1  POST 500 /restaurant/ pq: invalid input syntax for type json
+11:12:33 172.18.0.1  POST 500 /restaurant/ pq: invalid input syntax for type json
+11:13:53 172.18.0.1  POST 500 /restaurant/ invalid character '}' looking for beginning of object key string
+11:13:59 172.18.0.1  POST 500 /restaurant/ invalid character '}' looking for beginning of object key string
+11:14:06 172.18.0.1  POST 500 /restaurant/ json: cannot unmarshal object into Go struct field RestaurantsStruct.origin of type []uint8
+11:15:26 172.18.0.1  POST 500 /restaurant/ json: cannot unmarshal object into Go struct field RestaurantsStruct.origin of type []uint8
+11:15:50 172.18.0.1  POST 500 /restaurant/ json: cannot unmarshal object into Go struct field RestaurantsStruct.origin of type []uint8
+11:16:10 172.18.0.1  POST 500 /restaurant/ json: cannot unmarshal object into Go struct field RestaurantsStruct.origin of type []uint8
+11:16:38 172.18.0.1  POST 500 /restaurant/ sql: converting argument $4 type: unsupported type map[string]string, a map
+11:19:24 172.18.0.1  POST 500 /restaurant/ sql: converting argument $4 type: unsupported type map[string]string, a map
+11:22:03 172.18.0.1  POST 201 /restaurant/ -
+11:22:11 172.18.0.1  POST 500 /restaurant/ pq: duplicate key value violates unique constraint "restaurants_name_key"
+11:22:19 172.18.0.1  POST 201 /restaurant/ -
+11:22:30 172.18.0.1  POST 201 /restaurant/ -

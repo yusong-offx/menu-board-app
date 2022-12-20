@@ -18,10 +18,10 @@ CREATE TABLE RESTAURANT_TYPES (
 
 CREATE TABLE RESTAURANTS (
     id serial primary key,
-    user_id int references USERS(id) on delete cascade,
+    user_id int not null references USERS(id) on delete cascade,
     name varchar(30) unique,
-    restaurant_type varchar(20)[] references RESTAURANT_TYPES(restaurant_type) on delete set null,
-    origin json,
+    restaurant_type varchar(20) references RESTAURANT_TYPES(restaurant_type) on delete set null,
+    origin varchar(1000),
     menu_types varchar(20)[]
 );
 
@@ -36,6 +36,7 @@ CREATE TABLE MENUS (
 );
 
 DROP INDEX IF EXISTS idx_login_id;
-CREATE INDEX idx_login_id on USERS using hash (login_id);
+DROP INDEX IF EXISTS idx_user_id;
 
-insert into users (login_id, login_password, first_name, last_name, email) values ('yusong','yusong', 'yujin', 'song', 'abc@gmail.com');
+CREATE INDEX idx_login_id on USERS using hash (login_id);
+CREATE INDEX idx_user_id on RESTAURANTS using hash (user_id);

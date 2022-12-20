@@ -6,8 +6,10 @@ import (
 )
 
 func AllGet(app *fiber.App) {
-	app.Get("/", func(c *fiber.Ctx) error {
-		return c.SendString("hello-world!")
-	})
-	restaurant.Get("/type", fn.GetRestaurantTypes)
+	// /user/signup
+	signup.Get("/:id", fn.PostSignUpUsersChecker)
+
+	// /restaurant
+	restaurant.Get("/types", fn.GetRestaurantTypes)
+	restaurant.Get("/info", fn.GetRestaurants) //query
 }

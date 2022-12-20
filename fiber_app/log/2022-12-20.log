@@ -1,0 +1,2 @@
+12:26:44 172.18.0.1  GET 404 /info Cannot GET /info
+12:26:57 172.18.0.1  GET 500 /restaurant/info pq: invalid input syntax for type integer: "asd"

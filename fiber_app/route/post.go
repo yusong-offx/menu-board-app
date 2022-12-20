@@ -6,15 +6,13 @@ import (
 )
 
 func AllPost(app *fiber.App) {
-	////////
-	// User
+	// /user
 	user.Post("/login", fn.PostLogin)
 
-	// /user/signup/*
+	// /user/signup
 	signup.Post("/", fn.PostSignUp)
-	signup.Post("/check/id", fn.PostSignUpUsersChecker)
 
-	//////////////
-	// Restaurant
-	restaurant.Post("/type", fn.PostRestaurantTypes)
+	// /restaurant
+	restaurant.Post("/", fn.PostRestaurants)
+	restaurant.Post("/types", fn.PostRestaurantTypes)
 }

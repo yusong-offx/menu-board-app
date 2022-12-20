@@ -1,13 +1,15 @@
 package components
 
 import (
+	"errors"
+
 	"github.com/gofiber/fiber/v2"
 	"golang.org/x/crypto/bcrypt"
 )
 
 type UserStruct struct {
 	LoginID   string `json:"login_id"`
-	Password  string `json:"login_password"`
+	Password  string `json:"lrogin_password"`
 	FirstName string `json:"first_name"`
 	LastName  string `json:"last_name"`
 	Email     string `json:"email"`
@@ -27,17 +29,14 @@ type LoginRetStruct struct {
 }
 
 func PostSignUpUsersChecker(c *fiber.Ctx) error {
-	data := struct {
-		Id string `json:"login_id"`
-	}{}
-	if err := c.BodyParser(&data); err != nil {
-		return err
+	id := c.Params("id", "")
+	if id == "" {
+		return errors.New("no param")
 	}
 	// Check user already exist
 	if err := Postgres.QueryRow(
-		"SELECT login_id FROM users WHERE login_id = $1",
-		data.Id).
-		Scan(&data.Id); err == nil {
+		"SELECT login_id FROM users WHERE login_id = $1", id).
+		Scan(&id); err == nil {
 		return c.Status(fiber.StatusConflict).SendString("user_id is already exist")
 	}
 	return c.SendStatus(fiber.StatusOK)
