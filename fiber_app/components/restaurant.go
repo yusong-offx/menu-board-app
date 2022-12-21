@@ -15,6 +15,20 @@ type RestaurantsStruct struct {
 	MenuTypes      []string          `json:"menu_types"`
 }
 
+type RestaurantsRetStruct struct {
+	ID             int      `json:"id"`
+	UserID         int      `json:"user_id"`
+	Name           string   `json:"name"`
+	RestaurantType string   `json:"restaurant_type"`
+	Origin         string   `json:"origin"`
+	MenuTypes      []string `json:"menu_types"`
+}
+
+type RestaurantsQueryStruct struct {
+	UserID       []string `query:"user_id"`
+	RestaurantID []string `query:"restaurant_id"`
+}
+
 func PostRestaurantTypes(c *fiber.Ctx) error {
 	var data string
 	if err := c.BodyParser(&data); err != nil {
@@ -74,47 +88,39 @@ func PostRestaurants(c *fiber.Ctx) error {
 	return c.SendStatus(fiber.StatusCreated)
 }
 
-type GetRestaurantsQueryStruct struct {
-	UserID       string   `query:"user_id"`
-	RestaurantID []string `query:"restaurant_id"`
-}
-
-type RestaurantsRetStruct struct {
-	ID             int      `json:"id"`
-	UserID         int      `json:"user_id"`
-	Name           string   `json:"name"`
-	RestaurantType string   `json:"restaurant_type"`
-	Origin         string   `json:"origin"`
-	MenuTypes      []string `json:"menu_types"`
-}
-
 func GetRestaurants(c *fiber.Ctx) error {
-	data := GetRestaurantsQueryStruct{}
-	if err := c.QueryParser(&data); err != nil {
+	query := RestaurantsQueryStruct{}
+	if err := c.QueryParser(&query); err != nil {
 		return err
 	}
-	ret, tmp := []RestaurantsRetStruct{}, RestaurantsRetStruct{}
 	// By user_id
-	if data.UserID != "" {
-		switch rows, err := Postgres.Query("SELECT * FROM restaurants WHERE user_id = $1", data.UserID); err {
-		case nil:
-			for rows.Next() {
-				if err := rows.Scan(&tmp.ID, &tmp.UserID, &tmp.Name, &tmp.RestaurantType, &tmp.Origin, &tmp.MenuTypes); err != nil {
-					return err
+	if query.UserID != nil {
+		ret, tmp := [][]RestaurantsRetStruct{}, RestaurantsRetStruct{}
+		for _, userID := range query.UserID {
+			switch rows, err := Postgres.Query("SELECT * FROM restaurants WHERE user_id = $1", userID); err {
+			case nil:
+				byUser := []RestaurantsRetStruct{}
+				for rows.Next() {
+					if err := rows.Scan(&tmp.ID, &tmp.UserID, &tmp.Name, &tmp.RestaurantType, &tmp.Origin, pq.Array(&tmp.MenuTypes)); err != nil {
+						return err
+					}
+					byUser = append(byUser, tmp)
 				}
-				ret = append(ret, tmp)
+				ret = append(ret, byUser)
+			default:
+				return err
 			}
-		default:
-			return err
 		}
+		return c.JSON(ret)
 	} else {
 		// By restaurant_id
-		for _, restaurantID := range data.RestaurantID {
-			if err := Postgres.QueryRow("SELECT * FROM restaurants WHERE id = $1", restaurantID).Scan(&tmp.ID, &tmp.UserID, &tmp.Name, &tmp.RestaurantType, &tmp.Origin, &tmp.MenuTypes); err != nil {
+		ret, tmp := []RestaurantsRetStruct{}, RestaurantsRetStruct{}
+		for _, restaurantID := range query.RestaurantID {
+			if err := Postgres.QueryRow("SELECT * FROM restaurants WHERE id = $1", restaurantID).Scan(&tmp.ID, &tmp.UserID, &tmp.Name, &tmp.RestaurantType, &tmp.Origin, pq.Array(&tmp.MenuTypes)); err != nil {
 				return err
 			}
 			ret = append(ret, tmp)
 		}
+		return c.JSON(ret)
 	}
-	return c.JSON(ret)
 }

@@ -1,2 +1,22 @@
 12:26:44 172.18.0.1  GET 404 /info Cannot GET /info
 12:26:57 172.18.0.1  GET 500 /restaurant/info pq: invalid input syntax for type integer: "asd"
+20:15:11 172.18.0.1  GET 200 /restaurant/menu -
+20:15:26 172.18.0.1  GET 200 /restaurant/menu -
+20:15:27 172.18.0.1  GET 200 /restaurant/menu -
+20:15:44 172.18.0.1  GET 200 /restaurant/menu -
+20:15:44 172.18.0.1  GET 200 /restaurant/menu -
+20:15:45 172.18.0.1  GET 200 /restaurant/menu -
+20:16:06 172.18.0.1  GET 200 /restaurant/menu -
+20:16:14 172.18.0.1  GET 200 /restaurant/menu -
+20:16:14 172.18.0.1  GET 200 /restaurant/menu -
+20:16:36 172.18.0.1  GET 200 /restaurant/menu -
+20:16:39 172.18.0.1  GET 500 /restaurant/menu schema: error converting value for "menu_id"
+20:16:49 172.18.0.1  GET 200 /restaurant/menu -
+20:26:00 198.98.59.132  GET 404 / Cannot GET /
+20:45:52 172.18.0.1  GET 200 /restaurant/menu -
+20:47:07 107.189.5.223  POST 404 /boaform/admin/formLogin Cannot POST /boaform/admin/formLogin
+21:22:14 198.98.59.132  GET 404 / Cannot GET /
+21:28:31 172.18.0.1  GET 500 /restaurant/menu sql: no rows in result set
+22:23:17 172.18.0.1  GET 404 / Cannot GET /
+22:23:17 172.18.0.1  GET 404 /favicon.ico Cannot GET /favicon.ico
+22:37:03 172.18.0.1  GET 404 /config Cannot GET /config

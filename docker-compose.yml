@@ -41,3 +41,5 @@ services:
       - 5050:80
     depends_on:
       - postgresql-db
+
+# docker run -it --network menu-board_default redis-cli -h redis-db

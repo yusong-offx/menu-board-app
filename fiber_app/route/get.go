@@ -12,4 +12,5 @@ func AllGet(app *fiber.App) {
 	// /restaurant
 	restaurant.Get("/types", fn.GetRestaurantTypes)
 	restaurant.Get("/info", fn.GetRestaurants) //query
+	restaurant.Get("/menu", fn.GetMenu)        //query
 }

@@ -1,0 +1,7 @@
+09:44:37 172.18.0.1  GET 404 / Cannot GET /
+09:44:37 172.18.0.1  GET 404 /favicon.ico Cannot GET /favicon.ico
+09:44:41 172.18.0.1  GET 404 /hello Cannot GET /hello
+09:49:02 172.30.1.254  GET 404 / Cannot GET /
+09:49:02 172.30.1.254  GET 404 /favicon.ico Cannot GET /favicon.ico
+09:49:06 172.30.1.254  GET 404 / Cannot GET /
+09:58:32 172.18.0.1  GET 404 /hello Cannot GET /hello

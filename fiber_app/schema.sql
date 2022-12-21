@@ -27,12 +27,12 @@ CREATE TABLE RESTAURANTS (
 
 CREATE TABLE MENUS (
     id serial primary key,
-    store_id int references RESTAURANTS(id) on delete cascade,
+    restaurant_id int references RESTAURANTS(id) on delete cascade,
     name varchar(30) unique,
     menu_type varchar(20),
     images varchar[],
     contents varchar(1000),
-    alleries varchar(500)
+    allergies varchar(500)
 );
 
 DROP INDEX IF EXISTS idx_login_id;
