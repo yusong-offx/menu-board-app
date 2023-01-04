@@ -29,6 +29,7 @@ CREATE TABLE MENUS (
     id serial primary key,
     restaurant_id int references RESTAURANTS(id) on delete cascade,
     name varchar(30) unique,
+    price smallint not null,
     menu_type varchar(20),
     images varchar[],
     contents varchar(1000),

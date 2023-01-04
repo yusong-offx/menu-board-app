@@ -4,7 +4,7 @@ sql
 / front에서 검사
 - sql 글자수제한 검사
 - login_id check => sign up
-- 사진 용량 제한 
+- 사진 용량 제한 + 갯수제한
 
 - restaurant_types, menu_types 전용테이블에서 가져오기 / front에서 검사
 - menus table에서 menu_type references restarant.menutype

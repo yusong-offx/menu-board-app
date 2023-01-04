@@ -16,4 +16,5 @@ func AllPost(app *fiber.App) {
 	restaurant.Post("/", fn.PostRestaurants)
 	restaurant.Post("/types", fn.PostRestaurantTypes)
 	restaurant.Post("/menu", fn.PostMenu)
+	restaurant.Post("/menu/images", fn.PostMenuImagesUpload)
 }

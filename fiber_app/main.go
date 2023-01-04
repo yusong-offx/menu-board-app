@@ -24,6 +24,7 @@ func main() {
 	route.MiddleWare(app)
 	route.AllGet(app)
 	route.AllPost(app)
+	route.AllDelete(app)
 
 	log.Fatal(app.Listen(":3000"))
 }

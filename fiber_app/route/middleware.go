@@ -20,4 +20,5 @@ func MiddleWare(app *fiber.App) {
 
 	app.Use(logger.New(components.LoggerConfig))
 	app.Use(recover.New())
+	app.Static("/static", "./assets")
 }
