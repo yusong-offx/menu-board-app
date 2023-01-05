@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/page/home.dart';
+import 'package:flutter_app/page/signup.dart';
 import 'package:flutter_app/page/login.dart';
 
 void main() {
@@ -15,8 +17,8 @@ class MyApp extends StatelessWidget {
         backgroundColor: const Color(0xFFb07845),
         textTheme: TextTheme(
           titleLarge: TextStyle(
-            fontSize: 28,
-            color: const Color(0xFF21233a).withOpacity(0.8),
+            fontSize: 22,
+            color: const Color(0xFF442c42).withOpacity(0.8),
           ),
           titleMedium: const TextStyle(
             fontSize: 18,
@@ -27,8 +29,13 @@ class MyApp extends StatelessWidget {
       ),
       home: Container(
         color: const Color(0xFFb07845),
-        child: const Home(),
+        child: Home(),
       ),
+      routes: {
+        "home": (context) => Home(),
+        "login": (context) => Login(),
+        "signup": (context) => const SignUp(),
+      },
     );
   }
 }
@@ -37,6 +44,6 @@ class MyApp extends StatelessWidget {
 
 // const myblack = Color(0xFFb07845);
 // const mywhite = Color(0xFF21233a);
-// const myblue = Color(0xFF5b1829);
+// const myblue = Color(0xFF5b1829);wwwwwwwwwwwwwwwwwwwwww
 // const asd = Color(0xFF442c42);
 // const mygreen = Color(0xFF0d5240);
