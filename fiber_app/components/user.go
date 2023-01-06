@@ -9,7 +9,7 @@ import (
 
 type UserStruct struct {
 	LoginID   string `json:"login_id"`
-	Password  string `json:"lrogin_password"`
+	Password  string `json:"login_password"`
 	FirstName string `json:"first_name"`
 	LastName  string `json:"last_name"`
 	Email     string `json:"email"`

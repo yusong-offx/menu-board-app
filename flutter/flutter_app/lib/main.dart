@@ -1,10 +1,30 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/model/apiservice.dart';
 import 'package:flutter_app/page/home.dart';
+import 'package:flutter_app/page/qrcode.dart';
 import 'package:flutter_app/page/signup.dart';
 import 'package:flutter_app/page/login.dart';
+import 'package:flutter_app/page/base.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
+
+final api = APIService();
+
+class MyCounter extends StateNotifier<String> {
+  MyCounter() : super("hey world");
+
+  void set(String val) {
+    super.state = val;
+  }
+}
+
+var counterProiver = StateNotifierProvider<MyCounter, String>(
+  (ref) => MyCounter(),
+);
 
 void main() {
-  runApp(const MyApp());
+  runApp(const ProviderScope(
+    child: MyApp(),
+  ));
 }
 
 class MyApp extends StatelessWidget {
@@ -29,12 +49,14 @@ class MyApp extends StatelessWidget {
       ),
       home: Container(
         color: const Color(0xFFb07845),
-        child: Home(),
+        child: const Home(),
       ),
       routes: {
-        "home": (context) => Home(),
-        "login": (context) => Login(),
-        "signup": (context) => const SignUp(),
+        "/home": (context) => const Home(),
+        "/login": (context) => Login(),
+        "/signup": (context) => const SignUp(),
+        "/base": (context) => const Base(),
+        "/qrcode": (context) => const QRcode(),
       },
     );
   }

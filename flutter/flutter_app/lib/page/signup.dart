@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/widget/logintextfield.dart';
 import 'package:flutter_app/widget/signupcontainer.dart';
+import 'package:flutter_app/main.dart';
 
 class SignUp extends StatefulWidget {
   const SignUp({Key? key}) : super(key: key);
@@ -17,6 +18,17 @@ class _SignUpState extends State<SignUp> {
   final LoginTextField email = LoginTextField(lable: "Email");
 
   bool idValidation = false;
+
+  bool onJoin() {
+    Map<String, dynamic> data = {
+      "login_id": id,
+      "login_password": password,
+      "first_name": firstName,
+      "last_name": lastName,
+      "email": email,
+    };
+    api.postUser(data).then((ok) => ok).catchError((_) => false);
+  }
 
   void isIDValid() {
     setState(() {
@@ -95,7 +107,11 @@ class _SignUpState extends State<SignUp> {
               const SizedBox(height: 20),
               Center(
                 child: TextButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    if (onJoin()) {
+                      Navigator.pop(context);
+                    }
+                  },
                   child: Text(
                     "Join",
                     style: Theme.of(context).textTheme.titleLarge,

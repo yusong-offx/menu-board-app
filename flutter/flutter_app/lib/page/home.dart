@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 class Home extends StatelessWidget {
+  const Home({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     final deviceSize = MediaQuery.of(context).size;
@@ -33,9 +35,7 @@ class Home extends StatelessWidget {
                   ),
                 ),
                 onPressed: () {
-                  Navigator.pushNamed(context, "login");
-                  //   Navigator.pushNamedAndRemoveUntil(
-                  //       context, "login", (route) => false);
+                  Navigator.pushNamed(context, "/login");
                 },
                 child: Text(
                   "Login",
@@ -53,7 +53,7 @@ class Home extends StatelessWidget {
                   ),
                 ),
                 onPressed: () {
-                  Navigator.pushNamed(context, "signup");
+                  Navigator.pushNamed(context, "/signup");
                 },
                 child: Text(
                   "Sign Up",

@@ -59,7 +59,9 @@ class Login extends StatelessWidget {
                   ),
                 ),
                 onPressed: () {
-                  print(password.ctl.text);
+                  // Navigator.pushNamedAndRemoveUntil(
+                  //     context, "/base", (route) => false);
+                  Navigator.pushNamed(context, "/base");
                 },
                 child: Text(
                   "Login",
