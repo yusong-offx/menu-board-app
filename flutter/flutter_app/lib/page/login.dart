@@ -4,7 +4,8 @@ import 'package:flutter_app/widget/logintextfield.dart';
 
 class Login extends StatelessWidget {
   final LoginTextField id = LoginTextField(lable: "ID");
-  final LoginTextField password = LoginTextField.forPassword(lable: "Password");
+  final LoginTextField password =
+      LoginTextField.fromPassword(lable: "Password");
 
   Login({
     Key? key,

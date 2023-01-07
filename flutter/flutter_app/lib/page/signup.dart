@@ -12,29 +12,55 @@ class SignUp extends StatefulWidget {
 
 class _SignUpState extends State<SignUp> {
   final LoginTextField id = LoginTextField(lable: "ID");
-  final LoginTextField password = LoginTextField(lable: "Password");
+  final LoginTextField password =
+      LoginTextField.fromPassword(lable: "Password");
   final LoginTextField firstName = LoginTextField(lable: "First Name");
   final LoginTextField lastName = LoginTextField(lable: "Last Name");
   final LoginTextField email = LoginTextField(lable: "Email");
 
+  final snackbar = const SnackBar(
+    duration: Duration(milliseconds: 600),
+    content: Text(
+      "Success to Join us!",
+      style: TextStyle(
+        color: Colors.white,
+        fontSize: 18,
+      ),
+    ),
+    behavior: SnackBarBehavior.floating,
+  );
   bool idValidation = false;
+  bool postOK = false;
+  bool buttonActive = true;
 
-  bool onJoin() {
-    Map<String, dynamic> data = {
-      "login_id": id,
-      "login_password": password,
-      "first_name": firstName,
-      "last_name": lastName,
-      "email": email,
-    };
-    api.postUser(data).then((ok) => ok).catchError((_) => false);
+  void onJoin() async {
+    // Form Validation Check
+    setState(() {
+      buttonActive = false;
+    });
+    postOK = await api.postUser({
+      "login_id": id.ctl.text,
+      "login_password": password.ctl.text,
+      "first_name": firstName.ctl.text,
+      "last_name": lastName.ctl.text,
+      "email": email.ctl.text,
+    });
+    setState(() {
+      if (postOK) {
+        Navigator.pop(context);
+        ScaffoldMessenger.of(context).showSnackBar(snackbar);
+      }
+      buttonActive = true;
+    });
   }
 
   void isIDValid() {
+    // check invalid
     setState(() {
+      Navigator.pop(context);
+      ScaffoldMessenger.of(context).showSnackBar(snackbar);
       idValidation = !idValidation;
     });
-    // check invalid
   }
 
   @override
@@ -106,17 +132,15 @@ class _SignUpState extends State<SignUp> {
               ),
               const SizedBox(height: 20),
               Center(
-                child: TextButton(
-                  onPressed: () {
-                    if (onJoin()) {
-                      Navigator.pop(context);
-                    }
-                  },
-                  child: Text(
-                    "Join",
-                    style: Theme.of(context).textTheme.titleLarge,
-                  ),
-                ),
+                child: buttonActive
+                    ? TextButton(
+                        onPressed: onJoin,
+                        child: Text(
+                          "Join",
+                          style: Theme.of(context).textTheme.titleLarge,
+                        ),
+                      )
+                    : const CircularProgressIndicator(),
               )
             ],
           ),

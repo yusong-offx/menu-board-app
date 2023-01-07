@@ -8,11 +8,11 @@ import (
 )
 
 type UserStruct struct {
-	LoginID   string `json:"login_id"`
-	Password  string `json:"login_password"`
-	FirstName string `json:"first_name"`
-	LastName  string `json:"last_name"`
-	Email     string `json:"email"`
+	LoginID   string `json:"login_id"`       // not null
+	Password  string `json:"login_password"` // not null
+	FirstName string `json:"first_name"`     // nullable
+	LastName  string `json:"last_name"`      // nullable
+	Email     string `json:"email"`          // not null
 }
 
 type LoginStruct struct {

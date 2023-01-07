@@ -10,7 +10,9 @@ class LoginTextField extends StatelessWidget {
     required this.lable,
   }) : super(key: key);
 
-  LoginTextField.forPassword({Key? key, required this.lable}) : star = true;
+  LoginTextField.fromPassword({Key? key, required this.lable})
+      : star = true,
+        super(key: key);
 
   @override
   Widget build(BuildContext context) {

@@ -148,3 +148,7 @@
 10:57:36 156.214.34.47  GET 404 /shell Cannot GET /shell
 11:05:22 36.229.152.190  GET 404 / Cannot GET /
 11:25:47 198.98.59.132  GET 404 / Cannot GET /
+11:35:49 47.254.76.138  GET 404 / Cannot GET /
+11:35:50 47.254.76.138  GET 404 /Public/home/js/check.js Cannot GET /Public/home/js/check.js
+11:35:50 47.88.87.97  GET 404 /static/admin/javascript/hetong.js Cannot GET /static/admin/javascript/hetong.js
+11:37:34 41.74.116.9  GET 404 / Cannot GET /
