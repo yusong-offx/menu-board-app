@@ -23,7 +23,7 @@ class Login extends StatelessWidget {
             child: Text(
               "🍖 Enjoy Your Meal 🍖",
               style: TextStyle(
-                fontSize: 34,
+                fontSize: 28,
                 color: const Color(0xFF442c42).withOpacity(0.8),
               ),
             ),

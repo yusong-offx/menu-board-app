@@ -9,17 +9,22 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 final api = APIService();
 
-class MyCounter extends StateNotifier<String> {
-  MyCounter() : super("hey world");
-
-  void set(String val) {
-    super.state = val;
+class MyState extends StateNotifier<Map<String, dynamic>> {
+  MyState()
+      : super({
+          "isLogin": false,
+          "test": "hello",
+        });
+  // void p() {
+  //   print(super.state);
+  // }
+  Map<String, dynamic> get() {
+    return super.state;
   }
 }
 
-var counterProiver = StateNotifierProvider<MyCounter, String>(
-  (ref) => MyCounter(),
-);
+var myStateProvider =
+    StateNotifierProvider<MyState, Map<String, dynamic>>((ref) => MyState());
 
 void main() {
   runApp(const ProviderScope(
@@ -27,14 +32,14 @@ void main() {
   ));
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+class MyApp extends ConsumerWidget {
+  const MyApp({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return MaterialApp(
       theme: ThemeData(
-        backgroundColor: const Color(0xFFb07845),
+        backgroundColor: const Color.fromARGB(255, 22, 15, 9),
         textTheme: TextTheme(
           titleLarge: TextStyle(
             fontSize: 22,

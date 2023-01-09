@@ -18,7 +18,7 @@ class _BaseState extends ConsumerState<Base> {
 
   @override
   Widget build(BuildContext context) {
-    final counter = ref.watch(counterProiver);
+    final counter = ref.watch(myStateProvider);
     return const Text("good");
     // return ListView.separated(
     //   itemCount: itemCount,

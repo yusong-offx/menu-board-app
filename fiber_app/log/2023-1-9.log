@@ -1,0 +1,39 @@
+08:01:22 198.98.59.132  GET 404 / Cannot GET /
+08:07:10 172.30.1.254  POST 201 /user/signup -
+08:07:29 172.30.1.254  POST 500 /user/signup pq: duplicate key value violates unique constraint "users_login_id_key"
+08:07:34 172.30.1.254  POST 500 /user/signup pq: duplicate key value violates unique constraint "users_login_id_key"
+08:14:53 172.30.1.254  POST 201 /user/signup -
+08:32:39 115.227.135.41  GET 404 /web/cgi-bin/hi3510/param.cgi Cannot GET /web/cgi-bin/hi3510/param.cgi
+08:56:17 195.133.40.86  POST 404 /boaform/admin/formLogin Cannot POST /boaform/admin/formLogin
+09:43:21 198.98.59.132  GET 404 / Cannot GET /
+09:44:23 151.65.92.113  GET 404 /shell Cannot GET /shell
+09:47:09 193.35.18.181  POST 404 /ztp/cgi-bin/handler Cannot POST /ztp/cgi-bin/handler
+10:11:09 103.203.57.7  GET 404 / Cannot GET /
+10:17:54 172.30.1.254  POST 201 /user/signup -
+10:18:10 172.30.1.254  POST 500 /user/signup pq: duplicate key value violates unique constraint "users_login_id_key"
+10:18:39 172.30.1.254  POST 500 /user/signup pq: duplicate key value violates unique constraint "users_login_id_key"
+10:18:43 172.30.1.254  POST 500 /user/signup pq: duplicate key value violates unique constraint "users_login_id_key"
+10:18:59 172.30.1.254  POST 500 /user/signup pq: duplicate key value violates unique constraint "users_login_id_key"
+10:31:45 172.30.1.254  POST 500 /user/signup pq: duplicate key value violates unique constraint "users_login_id_key"
+10:32:18 172.30.1.254  POST 500 /user/signup pq: duplicate key value violates unique constraint "users_login_id_key"
+10:39:34 172.30.1.254  GET 405 /user/signup/ Method Not Allowed
+10:42:30 172.30.1.254  GET 405 /user/signup/ Method Not Allowed
+10:42:32 172.30.1.254  GET 405 /user/signup/ Method Not Allowed
+10:42:47 172.30.1.254  GET 200 /user/signup/abc -
+10:43:00 172.30.1.254  GET 200 /user/signup/7 -
+10:43:19 172.30.1.254  POST 201 /user/signup -
+10:43:28 172.30.1.254  GET 200 /user/signup/abc -
+10:43:29 172.30.1.254  POST 201 /user/signup -
+10:43:37 172.30.1.254  GET 409 /user/signup/abc -
+10:44:32 172.30.1.254  GET 409 /user/signup/abc -
+10:44:36 172.30.1.254  GET 200 /user/signup/abcaa -
+10:44:38 106.75.80.236  GET 404 / Cannot GET /
+10:44:38 172.30.1.254  POST 201 /user/signup -
+10:44:43 172.30.1.254  GET 409 /user/signup/abc -
+10:44:46 172.30.1.254  GET 409 /user/signup/abc -
+10:45:19 106.75.81.136  GET 404 / Cannot GET /
+10:49:53 172.30.1.254  GET 409 /user/signup/abc -
+10:49:57 172.30.1.254  GET 409 /user/signup/abc -
+10:50:03 172.30.1.254  GET 200 /user/signup/abca -
+10:50:04 172.30.1.254  GET 200 /user/signup/abca -
+10:50:18 172.30.1.254  POST 201 /user/signup -

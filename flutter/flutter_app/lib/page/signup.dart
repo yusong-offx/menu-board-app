@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/widget/logintextfield.dart';
-import 'package:flutter_app/widget/signupcontainer.dart';
 import 'package:flutter_app/main.dart';
+import 'package:flutter_app/widget/signupcontainer.dart';
+import 'package:top_snackbar_flutter/custom_snack_bar.dart';
+import 'package:top_snackbar_flutter/top_snack_bar.dart';
 
 class SignUp extends StatefulWidget {
   const SignUp({Key? key}) : super(key: key);
@@ -18,49 +20,97 @@ class _SignUpState extends State<SignUp> {
   final LoginTextField lastName = LoginTextField(lable: "Last Name");
   final LoginTextField email = LoginTextField(lable: "Email");
 
-  final snackbar = const SnackBar(
-    duration: Duration(milliseconds: 600),
-    content: Text(
-      "Success to Join us!",
-      style: TextStyle(
-        color: Colors.white,
-        fontSize: 18,
-      ),
-    ),
-    behavior: SnackBarBehavior.floating,
-  );
   bool idValidation = false;
-  bool postOK = false;
   bool buttonActive = true;
 
+  void topSnackbar(String msg, bool err) {
+    showTopSnackBar(
+      Overlay.of(context)!,
+      err
+          ? CustomSnackBar.error(
+              message: msg,
+              textStyle: const TextStyle(color: Colors.white, fontSize: 22),
+            )
+          : CustomSnackBar.success(
+              message: msg,
+              textStyle: const TextStyle(color: Colors.white, fontSize: 22),
+            ),
+      displayDuration: const Duration(milliseconds: 100),
+    );
+  }
+
   void onJoin() async {
-    // Form Validation Check
+    if (!idValidation) {
+      topSnackbar(
+        "Check your ID",
+        true,
+      );
+      return;
+    } else if (password.ctl.text.isEmpty) {
+      topSnackbar(
+        "Write your Password",
+        true,
+      );
+      return;
+    } else if (firstName.ctl.text.isEmpty) {
+      topSnackbar(
+        "Write your First Name",
+        true,
+      );
+      return;
+    } else if (lastName.ctl.text.isEmpty) {
+      topSnackbar(
+        "Write your Last Name",
+        true,
+      );
+      return;
+    } else if (email.ctl.text.isEmpty) {
+      topSnackbar(
+        "Write your Email",
+        true,
+      );
+      return;
+    }
     setState(() {
       buttonActive = false;
     });
-    postOK = await api.postUser({
+    bool ok = await api.signUpUser({
       "login_id": id.ctl.text,
       "login_password": password.ctl.text,
       "first_name": firstName.ctl.text,
       "last_name": lastName.ctl.text,
       "email": email.ctl.text,
     });
-    setState(() {
-      if (postOK) {
-        Navigator.pop(context);
-        ScaffoldMessenger.of(context).showSnackBar(snackbar);
-      }
-      buttonActive = true;
-    });
+    setState(
+      () {
+        if (ok) {
+          Navigator.pop(context);
+          topSnackbar(
+            "Success to Join us!",
+            false,
+          );
+          return;
+        }
+        buttonActive = true;
+        topSnackbar(
+          "Something Wrong",
+          true,
+        );
+      },
+    );
   }
 
-  void isIDValid() {
-    // check invalid
-    setState(() {
-      Navigator.pop(context);
-      ScaffoldMessenger.of(context).showSnackBar(snackbar);
-      idValidation = !idValidation;
-    });
+  void isIDValid() async {
+    String inputID = id.ctl.text;
+    if (inputID.isEmpty) {
+      topSnackbar("Write your ID", true);
+      return;
+    }
+    idValidation = await api.signUpIDChecker(inputID);
+    if (!idValidation) {
+      topSnackbar("User exist", true);
+    }
+    setState(() {});
   }
 
   @override
